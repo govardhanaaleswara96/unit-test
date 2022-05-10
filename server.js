@@ -25,7 +25,9 @@ const mongooseConnection = async () => {
   }
 };
 mongooseConnection();
+module.exports = app;
 // server running
 app.listen(port, () => {
   console.log(`Server Running Port Number ${port}`);
 });
+

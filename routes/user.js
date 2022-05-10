@@ -10,6 +10,8 @@ router.put("/:id", authController.verifyToken, userController.updateUser);
 router.get("/", userController.getUsers);
 // Search users data route
 router.get("/:id", userController.getUserById);
+// Search users data route
+router.delete("/:id", userController.removeUserById);
 // login user routes
 router.post("/login", userController.loginUser);
 

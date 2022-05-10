@@ -157,10 +157,24 @@ const loginUser = async (req, res) => {
     });
   }
 };
+const removeUserById = async (req, res) => {
+  try {
+    const { id } = req.params.id;
+    const user = await orderModel.findByIdAndRemove(id);
+    res.status(201).json({
+      message: "User Removed Successfully",
+    });
+  } catch (error) {
+    res.status(201).json({
+      message: "Order cancelled Failed",
+    });
+  }
+};
 module.exports = {
   createUser,
   getUsers,
   getUserById,
   updateUser,
   loginUser,
+  removeUserById
 };
