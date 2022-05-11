@@ -5,7 +5,7 @@ const authController = require("../controllers/auth");
 // create user route
 router.post("/", userController.createUser);
 // update users data route
-router.put("/:id", authController.verifyToken, userController.updateUser);
+router.put("/:id",userController.updateUser);
 // get users data route
 router.get("/", userController.getUsers);
 // Search users data route

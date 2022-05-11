@@ -26,14 +26,14 @@ const createUser = async (req, res) => {
     });
     try {
       const result = await user.save();
-      console.log(result);
+     // console.log(result);
       res.status(201).json({
         message: "User Created Successfully",
         result,
       });
     } catch (error) {
       console.log(error);
-      res.status(201).json({
+      res.status(400).json({
         message: "User Creation Failed ",
       });
     }
@@ -72,9 +72,9 @@ const getUserById = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+   // console.log(error);
     res.status(404).json({
-      message: "server error",
+      message: error.message,
     });
   }
 };
@@ -100,14 +100,15 @@ const updateUser = async (req, res) => {
       mobile: mobile,
       permissionLevel: permissionLevel
     };
-
     try {
       const userResult = await userModel.findOneAndUpdate(findUser.id, {
         $set: user,
       });
+      const userId = userResult._id;
+      const findUserData = await userModel.findOne({ _id: userId});
       res.status(201).json({
         message: "User Details Updated",
-        userResult: userResult
+        userResult: findUserData
       });
     } catch (error) {
       console.log(error);
@@ -166,7 +167,7 @@ const removeUserById = async (req, res) => {
     });
   } catch (error) {
     res.status(201).json({
-      message: "Order cancelled Failed",
+      message: "User Removed",
     });
   }
 };
