@@ -122,42 +122,41 @@ const updateUser = async (req, res) => {
 /**
  * user login function
  */
-const loginUser = async (req, res) => {
-  const { email, password } = req.body;
-  console.log(password)
-  try {
-    /**
-     * find user exists or not
-     */
-    const user = await userModel.findOne({ email: email }).select("+password");
-    if (!user) {
-      res.status(404).json({
-        message: "User Not Found !",
-      });
-    } else {
-      /**
-       * check password correct or not
-       */
-      bcrypt.compare(password, user.password, (err, data) => {
-        if (data) {
-          const token = jwt.sign({ user }, "h4d5fe5");
-          res.status(200).json({
-            message: "User Login successfully",
-            accessToken: token,
-          });
-        } else {
-          res.status(403).json({
-            message: "Password Is Incorrect",
-          });
-        }
-      });
-    }
-  } catch (error) {
-    res.status(401).json({
-      message: "User Login Failed",
-    });
-  }
-};
+// const loginUser = async (req, res) => {
+//   const { email, password } = req.body;
+//   try {
+//     /**
+//      * find user exists or not
+//      */
+//     const user = await userModel.findOne({ email: email }).select("+password");
+//     if (!user) {
+//       res.status(404).json({
+//         message: "User Not Found !",
+//       });
+//     } else {
+//       /**
+//        * check password correct or not
+//        */
+//       bcrypt.compare(password, user.password, (err, data) => {
+//         if (data) {
+//           const token = jwt.sign({ user }, "h4d5fe5");
+//           res.status(200).json({
+//             message: "User Login successfully",
+//             accessToken: token,
+//           });
+//         } else {
+//           res.status(403).json({
+//             message: "Password Is Incorrect",
+//           });
+//         }
+//       });
+//     }
+//   } catch (error) {
+//     res.status(401).json({
+//       message: "User Login Failed",
+//     });
+//   }
+// };
 const removeUserById = async (req, res) => {
   try {
     const { id } = req.params.id;
@@ -176,6 +175,6 @@ module.exports = {
   getUsers,
   getUserById,
   updateUser,
-  loginUser,
+  // loginUser,
   removeUserById
 };

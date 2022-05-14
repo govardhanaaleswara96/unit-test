@@ -13,6 +13,6 @@ router.get("/:id", userController.getUserById);
 // Search users data route
 router.delete("/:id", userController.removeUserById);
 // login user routes
-router.post("/login", userController.loginUser);
+// router.post("/login", userController.loginUser);
 
 module.exports = router;
